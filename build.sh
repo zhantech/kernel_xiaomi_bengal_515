@@ -21,7 +21,7 @@ ANYKERNEL_BRANCH="topaz"
 # Costumize
 KERNEL="Pringgodani"
 RELEASE_VERSION="3.5"
-DEVICE="Topaz-Tapas-Xun"
+DEVICE="Topaz-Tapas-Xun-Sapphire-Sapphiren"
 BENGAL_DEVICE="Bengal"
 KERNELNAME="${KERNEL}-${RELEASE_VERSION}-${BRANCH}-${DEVICE}-$(TZ=Asia/Jakarta date +%y%m%d)"
 BENGAL_KERNELNAME="${KERNEL}-${RELEASE_VERSION}-${BRANCH}-${BENGAL_DEVICE}-$(TZ=Asia/Jakarta date +%y%m%d)"
