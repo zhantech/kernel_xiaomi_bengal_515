@@ -30,6 +30,9 @@ fi
 LINUX_COMPILE_BY="j1yann"
 LINUX_COMPILE_HOST="zen"
 
+LINUX_COMPILE_BY="ℤℍ𝔸ℕ𝕥𝕖𝕔𝕙™"
+LINUX_COMPILE_HOST="gatotkaca"
+
 UTS_VERSION="#$VERSION"
 CONFIG_FLAGS=""
 if [ -n "$SMP" ] ; then CONFIG_FLAGS="SMP"; fi
