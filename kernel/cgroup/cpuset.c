@@ -2619,11 +2619,9 @@ static ssize_t cpuset_write_resmask_wrapper(struct kernfs_open_file *of,
 {
 #ifdef CONFIG_CPUSETS_ASSIST
     static struct cs_target cs_targets[] = {
-        { "top-app",       "0-7" },  // Games use all cores for flexibility
-        { "foreground",    "0-7" },  // Foreground apps on all cores
-        { "background",    "4-7" },  // Background on efficiency cores
-        { "system-background", "0-7" },  // System tasks on all cores
-        { "restricted",    "4-7" },  // Restricted on efficiency cores
+        { "top-app",       "0-7" },  // Games on performance cores
+        { "foreground",    "0-7" },  // Foreground on all cores
+        { "restricted",    "4-7" },  // Restricted on efficiency
         { "camera-daemon", "0-7" },  // Camera on all cores
     };
 	struct cpuset *cs = css_cs(of_css(of));
