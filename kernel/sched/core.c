@@ -10362,7 +10362,7 @@ struct uclamp_min_multiplier_param {
 };
 
 static struct uclamp_min_multiplier_param uclamp_min_multiplier[] = {
-	{"top-app",	1.00 * POW10(UCLAMP_PERCENT_SHIFT)},
+	{"top-app",	1.20 * POW10(UCLAMP_PERCENT_SHIFT)},
 	{"foreground",	1.00 * POW10(UCLAMP_PERCENT_SHIFT)},
 };
 
