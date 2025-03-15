@@ -112,13 +112,25 @@ sha1sum "$HOME"/kernel/$FINAL_KERNEL_ZIP
 sha1sum "$HOME"/kernel/$FINAL_KERNEL_IMG
 }
 
-function upload() {
+function upload-tg() {
     "${TELEGRAM}" -f "$HOME"/kernel/"$FINAL_KERNEL_ZIP" -t "${TELEGRAM_TOKEN}" -c "${CHATIDQ}" 
 echo "Kernel uploaded to telegram..."
 
 END=$(TZ=Asia/Jakarta date +"%s")
 DIFF=$(( END - START ))
 tg_cast "Build for ${DEVICE} with ${CLANG_VERSION} <b>succeed</b> took $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)! by @zh4ntech"
+}
+
+function upload-sf() {
+while true; do
+
+read -p "Do you want upload kernel to Sourceforge? (y/n) " yn
+
+case $yn in 
+	[yY] )
+    echo ".........................."
+    echo ".     Uploading Kernel   ."
+    echo ".........................."
 
 scp "$HOME"/kernel/$FINAL_KERNEL_IMG zhantech@frs.sourceforge.net:/home/frs/project/zhantech/Pringgodani/bengal
 scp "$HOME"/kernel/$FINAL_KERNEL_ZIP zhantech@frs.sourceforge.net:/home/frs/project/zhantech/Pringgodani/topaz-xun
@@ -126,9 +138,23 @@ scp "$HOME"/kernel/$FINAL_KERNEL_ZIP zhantech@frs.sourceforge.net:/home/frs/proj
 echo "Kernel uploaded to sourceforge..."
 
 rm -rf "$HOME"/kernel
+
+    echo ".........................."
+    echo ".     Build Finished     ."
+    echo ".........................."
+		break;;
+	[nN] )
+    echo ".........................."
+    echo ".     Build Finished     ."
+    echo ".........................."
+		exit;;
+esac
+
+done
 }
 
 # eksekusi
+
     echo ".........................."
     echo ".     Clean Directory    ."
     echo ".........................."
@@ -147,24 +173,20 @@ compile_kernel
 ziping
 while true; do
 
-read -p "Do you want to upload kernel? (y/n) " yn
+read -p "Do you want upload kernel to Telegram? (y/n) " yn
 
 case $yn in 
 	[yY] )
     echo ".........................."
     echo ".     Uploading Kernel   ."
     echo ".........................."
-upload
-    echo ".........................."
-    echo ".     Build Finished     ."
-    echo ".........................."
+upload-tg
+upload-sf
 		break;;
 	[nN] )
-    echo ".........................."
-    echo ".     Build Finished     ."
-    echo ".........................."
-		exit;;
-	* ) echo invalid response;;
+upload-sf
+		break;;
+
 esac
 
 done
