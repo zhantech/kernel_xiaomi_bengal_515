@@ -779,7 +779,23 @@ static int __elevator_change(struct request_queue *q, const char *name)
 	return elevator_switch(q, e);
 }
 
-bool task_is_booster(struct task_struct *tsk);
+static inline bool task_is_booster(struct task_struct *tsk)
+{
+	char comm[sizeof(tsk->comm)];
+
+	get_task_comm(comm, tsk);
+	return !strcmp(comm, "init") || !strcmp(comm, "NodeLooperThrea") ||
+	       !strcmp(comm, "power@1.2-servi") ||
+	       !strcmp(comm, "power@1.3-servi") ||
+	       !strcmp(comm, "perf@1.0-servic") ||
+	       !strcmp(comm, "perf@2.0-servic") ||
+	       !strcmp(comm, "perf@2.1-servic") ||
+	       !strcmp(comm, "perf@2.2-servic") ||
+	       !strcmp(comm, "power@2.0-servic") ||
+	       !strcmp(comm, "iop@") ||
+	       !strcmp(comm, "PERFD-SERVER") ||
+	       !strcmp(comm, "init.qcom.post_");
+}
 
 ssize_t elv_iosched_store(struct request_queue *q, const char *name,
 			  size_t count)

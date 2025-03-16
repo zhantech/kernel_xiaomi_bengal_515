@@ -201,21 +201,11 @@ config LOCALVERSION_AUTO
 
 	  which is done within the script "scripts/setlocalversion".)
 
-menuconfig UNAME_OVERRIDE
-	bool "Override uname output for specific processes"
+config FACTORY_BUILD
+	bool "Build production-ready version of vendor modules"
+	default y
 	help
-	  This will modify struct new_utsname->release string's return value
-	  to another string on a specified process.
-
-if UNAME_OVERRIDE
-
-config UNAME_OVERRIDE_TARGET
-	string "Target process' cmdline for uname override"
-
-config UNAME_OVERRIDE_STRING
-	string "New uname's release string for uname override"
-
-endif
+	  Whenever you want to build production (factory) version of vendor modules
 
 config BUILD_SALT
 	string "Build ID Salt"
@@ -1339,6 +1329,15 @@ config RT_SOFTINT_OPTIMIZATION
 	 occupied by nonpreemptible tasks, such as a long softint, or CPUs
 	 which may soon block preemptions, such as a CPU running a ksoftirq
 	 thread which handles slow softints.
+
+config CPUSETS_ASSIST
+	bool "Cpuset configuration helper"
+	depends on CPUSETS
+	depends on ANDROID
+	help
+	  This option enables in-kernel overrides for cpuset values.
+
+	  If unsure, say N.
 
 config SYSFS_DEPRECATED
 	bool "Enable deprecated sysfs features to support old userspace tools"
